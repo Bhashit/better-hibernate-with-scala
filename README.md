@@ -2,13 +2,13 @@
 
 ## About this project
 
-This is an POC project to show that hibernate can play well with
+This is an POC project to show that hibernate can integrate well with
 Scala and Play, without using nulls, java-bean accessors or too much
 boilerplate. 
 
 This project was extracted from another, under-development
 project. I did that hoping that it would be helpful to someone else
-like me;  someone who doesn't think that ORMs are dead when you do
+like me; someone who doesn't think that ORMs are dead when you do
 functional programming. 
 
 I have done a lot of research on getting the persistence layer right for my
@@ -57,7 +57,6 @@ The line looks like this:
 
 ```
 export ACTIVATOR_OPTS="-javaagent:${userhome}/.ivy2/cache/org.aspectj/aspectjweaver/jars/aspectjweaver-1.8.2.jar"
-
 ```
 
 Replace the path after "-javaagent:" with your download path.
@@ -99,8 +98,7 @@ users yet.
 You can read this [painfully long blog post][blog-post] if you want to
 understand the exact details of what I am doing in this project.
 
-[blog-post]:
-http://bhashitparikh.com/2014/10/28/hibernate-with-scala-options-with-less-pain.html
+[blog-post]: http://bhashitparikh.com/2014/10/28/hibernate-with-scala-options-with-less-pain.html
 [scaldi]:http://scaldi.org/
 [secure-social]: http://securesocial.ws/
 [play-framework]: http://playframework.com/
