@@ -1,0 +1,28 @@
+#!/bin/bash
+
+### Helper script to run activator with the aspectjweaver included as environment var
+### We need this so that we can weave an aspect around a hibernate class' method
+### The code will not work correctly unless the aspectjweaver.jar path is specified
+### in ACTIVATOR_OPTS or JAVA_OPTS
+
+## Copied from activator script
+is_cygwin() {
+  local os=$(uname -s)
+  case "$os" in
+    CYGWIN*) return 0 ;;
+    *)  return 1 ;;
+  esac
+}
+
+
+userhome="$HOME"
+if is_cygwin; then
+  # cygwin sets home to something f-d up, set to real windows homedir
+  userhome="$USERPROFILE"
+fi
+
+## The aspectweaver version is the same as the one we specify in our build.sbt
+export ACTIVATOR_OPTS="-javaagent:${userhome}/.ivy2/cache/org.aspectj/aspectjweaver/jars/aspectjweaver-1.8.2.jar"
+
+## Run the activator with all the command line args
+./activator "${@}"

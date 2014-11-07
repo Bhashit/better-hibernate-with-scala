@@ -1,0 +1,12 @@
+application.name=Wanderer
+
+login.title=Login
+login.instructions=Use an account on one of the following to sign in
+
+login.google=Sign in with Google
+login.facebook=Sign in with Facebook
+login.twitter=Sign in with Twitter
+login.github=Sign in with GitHub
+
+
+menus.logout=Logout

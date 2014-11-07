@@ -1,0 +1,12 @@
+<aspectj>
+    <aspects>
+        <aspect name="aspectj.ComponentTuplizerAspect" />
+    </aspects>
+
+    <weaver options="-showWeaveInfo">
+      <include within="org.hibernate.tuple.component.*" />
+      <!-- For some reason, the aspects themselves need to be allowed to be
+           weaved in. Otherwise, exception is thrown -->
+      <include within="aspectj.*" />
+    </weaver>
+</aspectj>
