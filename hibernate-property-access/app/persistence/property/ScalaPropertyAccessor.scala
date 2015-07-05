@@ -44,7 +44,7 @@ object ScalaPropertyAccessor {
 
   private final class BasicGetter(private val clazz: Class[_], private val method: Method, private val propertyName: String) extends Getter {
     override def get(target: AnyRef): java.lang.Object = {
-      val returned = method.invoke(unwrappedTarget)
+      val returned = method.invoke(target)
       if(returned.isInstanceOf[Option[_]]) {
         returned.asInstanceOf[Option[_]].getOrElse(null).asInstanceOf[Object]
       } else {

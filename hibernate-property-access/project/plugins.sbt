@@ -3,4 +3,4 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 // The Play plugin
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.3.5")
+addSbtPlugin("com.typesafe.play" %% "sbt-plugin" % "2.3.6")
