@@ -1,6 +1,9 @@
-# Hibernate, securesocial, scaldi and play with Scala
+# Hibernate, Guice and Play with Scala
 
 ## About this project
+
+**Note:** Updated to play 2.4.2 with Guice and Hibernate 5.
+
 
 This is an POC project to show that hibernate can integrate well with
 Scala and Play, without using nulls, java-bean accessors or too much
@@ -22,10 +25,6 @@ Option types and the scala accessor methods.
 
 There is a [companion blog post][blog-post] that I wrote which
 explains, in more detail, what I am trying to do with this project.
-
-That aside, this can also be used as a skeleton project if you are
-planning to combine [scaldi][scaldi], [securesocial][secure-social]
-and Hibernate in your [play-framework][play-framework] application.
 
 **Disclaimer**: Maintenance of this project is not a high priority for
   me right now. Also, I am aware that a lot of code in this project
@@ -99,8 +98,6 @@ You can read this [painfully long blog post][blog-post] if you want to
 understand the exact details of what I am doing in this project.
 
 [blog-post]: http://bhashitparikh.com/2014/10/28/hibernate-with-scala-options-with-less-pain.html
-[scaldi]:http://scaldi.org/
-[secure-social]: http://securesocial.ws/
 [play-framework]: http://playframework.com/
 [ajweaver]: http://mvnrepository.com/artifact/org.aspectj/aspectjweaver/1.8.3
 [ltw]: https://www.eclipse.org/aspectj/doc/next/devguide/ltw.html
