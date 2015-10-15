@@ -1,8 +1,8 @@
 # Hibernate, Guice and Play with Scala
 
-## About this project
+**Updated to play 2.4.2 with Guice and Hibernate 5.**
 
-**Note:** Updated to play 2.4.2 with Guice and Hibernate 5.
+## About this project
 
 
 This is an POC project to show that hibernate can integrate well with
