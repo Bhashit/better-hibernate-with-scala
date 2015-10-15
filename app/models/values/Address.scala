@@ -1,6 +1,5 @@
 package models.values
 
-import models.Country
 import javax.persistence.Embeddable
 import javax.persistence.ManyToOne
 

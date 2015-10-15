@@ -4,8 +4,9 @@ import models.Role
 import java.lang.Long
 import org.hibernate.Session
 import org.hibernate.criterion.Restrictions
+import javax.inject._
 
-
+@Singleton
 class RoleDAO extends DAO[Role, Long] {
   def findByName(name: String)(implicit session: Session): Option[Role] = {
     val c = session.createCriteria(classOf[Role])

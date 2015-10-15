@@ -1,20 +1,16 @@
 package models
 
-import java.util.{HashSet, Set => JSet}
-import javax.persistence.ManyToOne
-import javax.persistence.UniqueConstraint
+import java.util.{HashSet, Set => JSet, LinkedHashSet}
 import javax.persistence._
 import models.values.Address
-import org.hibernate.annotations.Tuplizer
-import scala.collection.JavaConversions
+import org.hibernate.annotations.{Tuplizer, Target}
+import scala.collection.JavaConversions.asScalaSet
 import scala.collection.immutable.Set
-import securesocial.core.BasicProfile
-import securesocial.core.GenericProfile
-import org.hibernate.annotations.Target
+import securesocial.core.{BasicProfile, GenericProfile}
 
 
 @Entity
-@Table(uniqueConstraints = Array(new UniqueConstraint(columnNames = Array("providerId", "userId"))))
+@Table(name = "app_user", uniqueConstraints = Array(new UniqueConstraint(columnNames = Array("providerId", "userId"))))
 class User extends PersistentEntity {
 
   @Embedded
@@ -29,7 +25,7 @@ class User extends PersistentEntity {
   @ManyToMany(fetch = FetchType.EAGER)
   private var _roles: JSet[Role] = new HashSet
 
-  def roles = JavaConversions.asScalaSet(_roles)
+  def roles = asScalaSet(_roles)
   def addRole(role: Option[Role]) = role foreach (roles += _)
 
   override def hashCode = {

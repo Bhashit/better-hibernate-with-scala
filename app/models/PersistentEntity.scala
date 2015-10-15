@@ -1,16 +1,8 @@
 package models
 
-import javax.persistence.Access
-import javax.persistence.Access
-import javax.persistence.AccessType
-import javax.persistence.AccessType
-import javax.persistence.Id
-import javax.persistence.Transient
 import javax.persistence._
-import org.hibernate.annotations.AttributeAccessor
+import org.hibernate.annotations.{AttributeAccessor, Type}
 import scala.beans.BeanProperty
-import org.hibernate.annotations.Type
-
 
 @MappedSuperclass
 trait PersistentEntity {

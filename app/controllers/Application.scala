@@ -1,24 +1,23 @@
 package controllers
 
-import java.util.Collections
-import java.util.Date
-import java.util.UUID
+import java.util.{UUID, Collections}
 import models._
-import models.User
 import play.api._
 import play.api.mvc._
-import scaldi.Injectable.inject
-import scaldi.Injector
+import play.api.data._
+import play.api.data.Forms._
 import securesocial.core.RuntimeEnvironment
-import models.UserProfile
 import services.UserService
 import securesocial.core.SecureSocial
+import javax.inject._
+import play.api.i18n.{ MessagesApi, I18nSupport }
+import utils.RequestUtil.toJsonString
 
-class Application(implicit ij: Injector) extends Controller with SecureSocial[User] {
-
-  private val userService = inject [UserService]
-  override implicit lazy val env = inject[RuntimeEnvironment[User]]
-
+@Singleton
+class Application @Inject() (private val userService: UserService,
+                             val messagesApi: MessagesApi,
+                             implicit val env: RuntimeEnvironment[User]) extends Controller with SecureSocial[User] with I18nSupport {
+  
   def index = Action { implicit request =>
 
     val u = new User
@@ -40,7 +39,3 @@ class Application(implicit ij: Injector) extends Controller with SecureSocial[Us
     Ok(views.html.message("A new User object was just saved"))
   }
 }
-
-
-
-

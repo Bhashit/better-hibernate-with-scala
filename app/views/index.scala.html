@@ -1,7 +1,5 @@
-@(message: String)(implicit request: Request[AnyContent])
+@(implicit request: Request[AnyContent], messages: Messages)
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message)
-
+@main("Home") {
+    @play20.welcome("")
 }

@@ -39,14 +39,33 @@ abstract class DAO[T <: PersistentEntity, PK <: Serializable] {
     s.delete(entity)
   }
 
+  def removeAll(implicit s: Session) = {
+    // TODO do this via a query
+    findAll().foreach(remove)
+  }
+
   def save(entity: T)(implicit s: Session): T = {
     s.save(entity)
     entity
   }
 
+  def save(entities: Iterable[T])(implicit s: Session) {
+    // this could be very inefficient for large inserts as
+    // hibernate will disable batch inserts for entities with
+    // IDENTITY identifier generation strategy. Although, most
+    // of the time, we won't be inserting large datasets.
+    entities.map(s.save)
+  }
+
   def update(entity: T)(implicit s: Session): T = {
     s.update(entity)
     entity
+  }
+
+  // TODO setup hibernate's batch-size property and use the batch-size value
+  // here to flush the session every batch-size rows
+  def update(entities: Iterable[T])(implicit s: Session) {
+    entities.map(s.update)
   }
 }
 

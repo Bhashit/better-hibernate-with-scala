@@ -7,8 +7,9 @@ import org.hibernate.Session
 import org.hibernate.criterion.Restrictions.{eq => equal, _}
 import models.UserProfile
 import models.UserProfile._
+import javax.inject._
 
-
+@Singleton
 class UserDAO extends DAO[User, Long] {
   def findByUserIdAndProviderId(userId: String, providerId: String)(implicit session: Session): Option[User] = {
     val c = session.createCriteria(classOf[User])

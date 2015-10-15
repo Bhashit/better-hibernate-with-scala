@@ -1,8 +1,7 @@
 package persistence.property
 
 import org.hibernate.mapping.Property
-import org.hibernate.property.Getter
-import org.hibernate.property.Setter
+import org.hibernate.property.access.spi.{Getter, Setter}
 import org.hibernate.tuple.component.PojoComponentTuplizer
 import org.hibernate.mapping.Component
 
@@ -16,12 +15,12 @@ import org.hibernate.mapping.Component
 // be used.
 class CustomPojoComponentTuplizer(component: Component) extends PojoComponentTuplizer(component) {
   override def buildGetter(component: Component, prop: Property): Getter = {
-    prop.setPropertyAccessorName("persistence.property.ScalaPropertyAccessor")
+    prop.setPropertyAccessorName("persistence.property.ScalaPropertyAccessStrategy")
     prop.getGetter(component.getComponentClass())
   }
 
   override def buildSetter(component: Component, prop: Property): Setter = {
-    prop.setPropertyAccessorName("persistence.property.ScalaPropertyAccessor")
+    prop.setPropertyAccessorName("persistence.property.ScalaPropertyAccessStrategy")
     prop.getSetter(component.getComponentClass())
   }
 }

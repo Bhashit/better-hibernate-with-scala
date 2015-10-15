@@ -7,22 +7,39 @@ import java.beans.Introspector
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 import java.util.Map
-import _root_.org.hibernate.{ PropertyAccessException, PropertyNotFoundException, PropertySetterAccessException }
-import _root_.org.hibernate.engine.spi.{ SessionFactoryImplementor, SessionImplementor }
-import _root_.org.hibernate.property.{ Getter, PropertyAccessor, Setter, BasicPropertyAccessor }
+import _root_.org.hibernate.{PropertyAccessException, PropertyNotFoundException, PropertySetterAccessException}
+import _root_.org.hibernate.engine.spi.{SessionFactoryImplementor, SessionImplementor}
+import _root_.org.hibernate.property.access.spi.{Getter, Setter, PropertyAccess, PropertyAccessStrategy}
+import _root_.org.hibernate.property.access.internal.PropertyAccessBasicImpl
 import _root_.org.slf4j.LoggerFactory
 
-// TODO this class might need some work to make it look better. Keep an eye on it.
-class ScalaPropertyAccessor extends BasicPropertyAccessor {
-  import ScalaPropertyAccessor._
-  
-  override def getSetter(theClass: Class[_], propertyName: String): Setter = {
-    createSetter(theClass, propertyName);
-  }
+class ScalaPropertyAccessStrategy extends PropertyAccessStrategy {
 
-  override def getGetter(theClass: Class[_], propertyName: String): Getter = {
-    createGetter(theClass, propertyName);
-  }  
+    override def buildPropertyAccess(containerJavaType: Class[_], propertyName: String) = {
+      new ScalaPropertyAccessor(this, containerJavaType, propertyName );
+    }
+}
+
+object ScalaPropertyAccessStrategy {
+  val INSTANCE = new ScalaPropertyAccessStrategy();
+}
+
+// TODO this class might need some work to make it look better. Keep an eye on it.
+class ScalaPropertyAccessor(val strategy: ScalaPropertyAccessStrategy, 
+			val containerJavaType: Class[_],
+			val propertyName: String) extends PropertyAccess {
+
+  import ScalaPropertyAccessor._
+
+  private lazy val setter = createSetter(containerJavaType, propertyName)
+  private lazy val getter = createGetter(containerJavaType, propertyName)
+
+  override def getSetter(): Setter = setter
+
+  override def getGetter(): Getter = getter
+
+  override def getPropertyAccessStrategy() = strategy
+
 }
 
 

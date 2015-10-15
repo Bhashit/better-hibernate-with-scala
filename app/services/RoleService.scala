@@ -2,15 +2,15 @@ package services
 
 import models.Role
 import java.lang.Long
-import scaldi.Injector
-import scaldi.Injectable.inject
 import daos.RoleDAO
 import models.Role
 import daos.RoleDAO
+import javax.inject._
+import org.hibernate.SessionFactory
 
-
-class RoleService(implicit injector: Injector) extends BaseService[Role, Long] {
-  protected val dao = inject [RoleDAO]
+@Singleton
+class RoleService @Inject() (protected val dao: RoleDAO,
+    protected val sf: SessionFactory) extends BaseService[Role, Long](sf) {
 
   def findByName(name: String): Option[Role] = {
     inTransaction { implicit session =>

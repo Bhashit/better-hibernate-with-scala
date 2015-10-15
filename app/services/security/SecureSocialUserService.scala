@@ -4,19 +4,16 @@ import models._
 import play.api.{Application, Logger}
 import play.api.Logger.logger
 import scala.concurrent.Future
-import scaldi.Injectable.inject
-import scaldi.Injector
-import scaldi.play.ScaldiSupport
 import securesocial.core.{BasicProfile, PasswordInfo}
 import securesocial.core.providers.MailToken
 import securesocial.core.services.{SaveMode, UserService => SecureUserService}
 import services.UserService
 import scala.concurrent.ExecutionContext.Implicits.global
+import javax.inject._
 
-class SecureSocialUserService(implicit ij: Injector) extends SecureUserService[User] {
+@Singleton
+class SecureSocialUserService @Inject() (val userService: UserService) extends SecureUserService[User] {
 
-  lazy val userService = inject [UserService]
-  
   /** Gets called on login, registration or password-change. */
   override def save(profile: BasicProfile, mode: SaveMode): Future[User] =  {
     import SaveMode._
